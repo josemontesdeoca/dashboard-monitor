@@ -37,10 +37,11 @@ class RegisterHandler(base.BaseHandler):
     def get(self):
         current_user = users.get_current_user()
 
-        user = User(id=current_user.user_id())
-        user.user_id = current_user.user_id()
-        user.email = current_user.email()
+        if not User.get_by_id(current_user.user_id()):
+            user = User(id=current_user.user_id())
+            user.user_id = current_user.user_id()
+            user.email = current_user.email()
 
-        user.put()
+            user.put()
 
         self.redirect('/')
