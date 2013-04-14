@@ -1,12 +1,18 @@
+# Copyright 2013 Jose Montes de Oca. All Rights Reserved.
+
+"""Application Main entry point."""
+
+__author__ = 'Jose Montes de Oca <jfmontesdeoca11@gmail.com>'
+
+import os
 import webapp2
 
+import handlers
 
-class MainPage(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write('Hola Mundo!')
+DEBUG = os.getenv('SERVER_SOFTWARE', '').startswith('Dev')
 
 
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
-], debug=True)
+    ('/', handlers.MainPageHandler),
+    ('/register', handlers.RegisterHandler),
+], debug=DEBUG)

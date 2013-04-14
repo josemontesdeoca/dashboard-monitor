@@ -13,8 +13,7 @@ class User(ndb.Model):
     User model used with App Engine's User API.
     """
 
-    user = ndb.UserProperty(indexed=False)
-    user_id = ndb.StrinProperty()
+    user_id = ndb.StringProperty()
     email = ndb.StringProperty()
     date_created = ndb.DateTimeProperty(auto_now_add=True)
 

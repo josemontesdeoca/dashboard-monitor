@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %} Dashboard Monitor {% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="author" content="DashboardMonitor">
+
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1>Dashboard Monitor</h1>
+        </header>
+
+        <section id="container">
+            {% block body %}{% endblock %}
+        </section> <!-- /container -->
+
+        {% block footer %}
+            <hr>
+            <footer>
+                <img src="https://developers.google.com/appengine/images/appengine-noborder-120x30.gif" 
+    alt="Powered by Google App Engine" />
+            </footer>
+        {% endblock %}
+    </body>
+</html>

@@ -1,9 +1,25 @@
 application: dashboard-monitor
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
 
+skip_files:
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- \.gitignore
+- ^\.git/.*
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: webapp2
+  version: "2.5.1"
+
 handlers:
+- url: /favicon\.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon\.ico
+
 - url: /.*
   script: main.application
