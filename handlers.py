@@ -21,13 +21,7 @@ class MainPageHandler(base.BaseHandler):
             if not User.get_by_id(current_user.user_id()):
                 self.redirect('/register')
 
-        template_args = {
-            'user': current_user,
-            'login_url': users.create_login_url('/register'),
-            'logout_url': users.create_logout_url('/')
-        }
-
-        self.render_template('index.html', **template_args)
+        self.render_template('index.html')
 
 
 class RegisterHandler(base.BaseHandler):

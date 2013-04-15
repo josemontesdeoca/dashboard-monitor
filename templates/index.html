@@ -2,15 +2,7 @@
 
 {% block body %}
 
-    {% if not user %}
-        <div>
-            <p><a href="{{ login_url }}">Ingresa usando una Cuenta de Google &raquo;</a></p>
-        </div>
-    {% else %}
-        <div>
-            <p>Bienvenido <strong>{{ user.email() }}</strong>! [<a href="{{ logout_url }}">Cerrar sesion &raquo;</a>]</p>
-        </div>
-
+    {% if user %}
         <div>
             <p>
                 <a href="/new-page">Agregar nueva pagina</a>

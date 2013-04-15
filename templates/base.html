@@ -11,6 +11,15 @@
     <body>
         <header>
             <h1>Dashboard Monitor</h1>
+            {% if not user %}
+                <div>
+                    <p><a href="{{ login_url }}">Ingresa usando una Cuenta de Google &raquo;</a></p>
+                </div>
+            {% else %}
+                <div>
+                    <p>Bienvenido <strong>{{ user.email() }}</strong>! [<a href="{{ logout_url }}">Cerrar sesion &raquo;</a>]</p>
+                </div>
+            {% endif %}
         </header>
 
         <section id="container">

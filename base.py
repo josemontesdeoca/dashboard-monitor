@@ -30,7 +30,9 @@ class BaseHandler(webapp2.RequestHandler):
         """
 
         kwargs.update({
-            'user': users.get_current_user()
+            'user': users.get_current_user(),
+            'login_url': users.create_login_url('/register'),
+            'logout_url': users.create_logout_url('/')
         })
 
         template = self.jinja_environment.get_template(filename)
