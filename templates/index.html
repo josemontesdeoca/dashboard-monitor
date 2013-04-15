@@ -9,8 +9,9 @@
             </p>
             <h2>Paginas Web monitoreadas</h2>
             <ul>
-                <li>Ejemplo 1</li>
-                <li>Ejemplo 2</li>
+                {% for page in pages %}
+                    <li><a href="#">{{ page.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     {% endif %}

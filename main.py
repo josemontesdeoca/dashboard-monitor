@@ -15,4 +15,5 @@ DEBUG = os.getenv('SERVER_SOFTWARE', '').startswith('Dev')
 application = webapp2.WSGIApplication([
     ('/', handlers.MainPageHandler),
     ('/register', handlers.RegisterHandler),
+    ('/new-page', handlers.NewPageHandler),
 ], debug=DEBUG)

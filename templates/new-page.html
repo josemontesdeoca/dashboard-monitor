@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div>
+        <h2>Configurar pagina a monitorear</h2>
+        <form action="/new-page" method="POST">
+            Nombre <input type="text" name="name"><br>
+            URL <input type="text" name="url" value="http://www.example.com"><br>
+            <input type="submit" value="Registrar Pagina Web">
+        </form>
+    </div>
+
+{% endblock %}
