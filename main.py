@@ -16,4 +16,6 @@ application = webapp2.WSGIApplication([
     ('/', handlers.MainPageHandler),
     ('/register', handlers.RegisterHandler),
     ('/new-page', handlers.NewPageHandler),
+    ('/cron/monitor', handlers.MonitorHandler),
+    ('/task/ping', handlers.PingHandler),
 ], debug=DEBUG)

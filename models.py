@@ -39,6 +39,7 @@ class Page(ndb.Model):
 
 class Ping(ndb.Model):
     """Models an specific ping action to a page."""
+    page = ndb.KeyProperty(kind=Page)
     resp_time = ndb.IntegerProperty()
     resp_code = ndb.IntegerProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)

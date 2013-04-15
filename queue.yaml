@@ -1,0 +1,3 @@
+queue:
+- name: ping
+  rate: 1/s

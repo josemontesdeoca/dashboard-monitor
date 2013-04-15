@@ -4,12 +4,19 @@
 
 __author__ = 'Jose Montes de Oca <jfmontesdeoca11@gmail.com>'
 
-from google.appengine.api import users
+import logging
+import time
 from webapp2_extras.appengine.users import login_required
 
+from google.appengine.api import users
+from google.appengine.api import urlfetch
+from google.appengine.api import taskqueue
+from google.appengine.ext import db
+from google.appengine.ext import ndb
+
+
 import base
-from models import User
-from models import Page
+from models import User, Page, Ping
 
 
 class MainPageHandler(base.BaseHandler):
@@ -80,5 +87,54 @@ class NewPageHandler(base.BaseHandler):
             page.put()
 
             self.redirect('/')
-        except db.Error, e:
+        except db.Error:
             self.redirect('/')
+
+
+class MonitorHandler(base.BaseHandler):
+    """Handler to dispatch monitor task to measure latency statistics."""
+    def get(self):
+        q = Page.query()
+
+        logging.info('Starting Dispatch process')
+
+        for page in q.iter():
+            logging.info('Adding task to the queue to proccess '
+                         '%s Web Page' % page.name)
+
+            logging.info('urlsafe key %s' % page.key.urlsafe())
+            taskqueue.add(url='/task/ping',
+                          queue_name='ping',
+                          params={'key': page.key.urlsafe()})
+
+
+class PingHandler(base.BaseHandler):
+    """Handler to ping web pages every five minutes.
+
+    A cron job will call this handler every five minutes to record response
+    times.
+    """
+    def post(self):
+        key = ndb.Key(urlsafe=self.request.get('key'))
+
+        page = key.get()
+
+        if page:
+            start_time = time.time()
+
+            result = urlfetch.fetch(url=page.url,
+                                    deadline=30,
+                                    headers={'Cache-Control': 'max-age=0'})
+
+            resp_time = int((time.time() - start_time) * 1000)
+
+            logging.info('fetching %s - response time: %d ms'
+                         % (page.url, resp_time))
+
+            ping = Ping()
+            ping.page = page.key
+            ping.resp_time = resp_time
+            ping.resp_code = result.status_code
+            ping.put()
+        else:
+            logging.error('ERROR retrieving page to be monitored.')
