@@ -31,7 +31,7 @@ class Page(ndb.Model):
 
     user = ndb.KeyProperty(kind=User)
     url = ndb.StringProperty()
-    title = ndb.StringProperty()
+    name = ndb.StringProperty()
     method = ndb.StringProperty(default='GET', choices=set(METHODS))
     date_created = ndb.DateTimeProperty(auto_now_add=True)
     last_ping = ndb.DateTimeProperty()
