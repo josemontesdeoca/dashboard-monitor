@@ -37,6 +37,26 @@ class MainPageHandler(base.BaseHandler):
 
                 pages = q.fetch(10)
 
+                # Issue asynchronous fetch operations per page
+                for page in pages:
+                    query = Ping.query(Ping.page == page.key)
+                    query = query.order(Ping.date)
+
+                    # fetch 288 pings representing the last 24 hrs
+                    page.pings_future = query.fetch_async(288)
+
+                # Reading fetch results and calculate avg latency
+                for page in pages:
+                    pings = page.pings_future.get_result()
+
+                    total_resp_time = 0
+
+                    if pings:
+                        for p in pings:
+                            total_resp_time += p.resp_time
+
+                        page.avg_resp_time = total_resp_time/len(pings)
+
                 template_args.update({
                     'pages': pages,
                 })

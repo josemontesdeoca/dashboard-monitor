@@ -8,11 +8,20 @@
                 <a href="/new-page">Agregar nueva pagina</a>
             </p>
             <h2>Paginas Web monitoreadas</h2>
-            <ul>
+            
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tiempo de respuesta (avg)</th>
+                </tr>
                 {% for page in pages %}
-                    <li><a href="#">{{ page.name }}</a></li>
+                    <tr>
+                        <td><a href="#">{{ page.name }}</a></td>
+                        <td>{{ page.avg_resp_time }} ms</td>
+                    </tr>
                 {% endfor %}
-            </ul>
+            </table>
+
         </div>
     {% endif %}
 
