@@ -140,21 +140,30 @@ class PingHandler(base.BaseHandler):
         page = key.get()
 
         if page:
-            start_time = time.time()
+            try:
+                start_time = time.time()
 
-            result = urlfetch.fetch(url=page.url,
-                                    deadline=30,
-                                    headers={'Cache-Control': 'max-age=0'})
+                result = urlfetch.fetch(url=page.url,
+                                        deadline=30,
+                                        headers={'Cache-Control': 'max-age=0'})
 
-            resp_time = int((time.time() - start_time) * 1000)
+                resp_time = int((time.time() - start_time) * 1000)
 
-            logging.info('fetching %s - response time: %d ms'
-                         % (page.url, resp_time))
+                logging.info('fetching %s - response time: %d ms'
+                             % (page.url, resp_time))
 
-            ping = Ping()
-            ping.page = page.key
-            ping.resp_time = resp_time
-            ping.resp_code = result.status_code
-            ping.put()
+                ping = Ping()
+                ping.page = page.key
+                ping.resp_time = resp_time
+                ping.resp_code = result.status_code
+                ping.put()
+            except urlfetch.DownloadError as e:
+                logging.error('Error: %s' % e)
+            except urlfetch.ResponseTooLargeError as e:
+                logging.error(e)
+            except urlfetch.InvalidURLError as e:
+                logging.error("Invalid URL '%s' \n %s" % (page.url, e))
+            except urlfetch.Error as e:
+                logging.error(e)
         else:
             logging.error('ERROR retrieving page to be monitored.')
