@@ -12,12 +12,14 @@
             <table border="1">
                 <tr>
                     <th>Nombre</th>
-                    <th>Tiempo de respuesta (avg)</th>
+                    <th>Tiempo de respuesta (24hr avg)</th>
+                    <th>Ultima actualizacion (UTC)</th>
                 </tr>
                 {% for page in pages %}
                     <tr>
                         <td><a href="#">{{ page.name }}</a></td>
                         <td>{{ page.avg_resp_time }} ms</td>
+                        <td>{{ page.last_ping.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     </tr>
                 {% endfor %}
             </table>

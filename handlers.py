@@ -6,6 +6,7 @@ __author__ = 'Jose Montes de Oca <jfmontesdeoca11@gmail.com>'
 
 import logging
 import time
+from datetime import datetime
 from webapp2_extras.appengine.users import login_required
 
 from google.appengine.api import users
@@ -152,11 +153,20 @@ class PingHandler(base.BaseHandler):
                 logging.info('fetching %s - response time: %d ms'
                              % (page.url, resp_time))
 
-                ping = Ping()
-                ping.page = page.key
-                ping.resp_time = resp_time
-                ping.resp_code = result.status_code
-                ping.put()
+                @ndb.transactional(xg=True)
+                def save_ping():
+                    ping = Ping()
+                    ping.page = page.key
+                    ping.resp_time = resp_time
+                    ping.resp_code = result.status_code
+                    ping.put()
+
+                    # Update Last Ping data
+                    page.last_ping = datetime.now()
+                    page.put()
+
+                save_ping()
+
             except urlfetch.DownloadError as e:
                 logging.error('Error: %s' % e)
             except urlfetch.ResponseTooLargeError as e:
