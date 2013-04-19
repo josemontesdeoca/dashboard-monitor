@@ -18,4 +18,5 @@ application = webapp2.WSGIApplication([
     ('/new-page', handlers.NewPageHandler),
     ('/cron/monitor', handlers.MonitorHandler),
     ('/task/ping', handlers.PingHandler),
+    ('/monitor.json', handlers.VisualizeHandler),
 ], debug=DEBUG)
