@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!--Load the AJAX API-->
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the ready-made Google table visualization.
+        google.load("visualization", "1", {packages: ["corechart"]});
+
+        // Set a callback to run when the API is loaded.
+        google.setOnLoadCallback(drawVisualization);
+
+        // Send the query to the datasource
+        function drawVisualization() {
+
+            var query = new google.visualization.Query("http://dashboard-monitor.appspot.com/monitor.json?page={{ page.key.urlsafe() }}");
+            query.send(handleJsonResponse);
+        }
+
+        function handleJsonResponse(response) {
+            var data = response.getDataTable();
+            var chart = new google.visualization.AreaChart(document.getElementById("monitor_viz"));
+            chart.draw(data, {width: 800, height: 300});
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>{{ page.name }} - Dashboard</h1>
+        <div id="monitor_viz"></div>
+    </div>
+
+{% endblock %}

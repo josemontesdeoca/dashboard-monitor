@@ -17,7 +17,7 @@
                 </tr>
                 {% for page in pages %}
                     <tr>
-                        <td><a href="#">{{ page.name }}</a></td>
+                        <td><a href="page/{{ page.key.urlsafe() }}">{{ page.name }}</a></td>
                         <td>{{ page.avg_resp_time }} ms</td>
                         <td>{{ page.last_ping.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     </tr>

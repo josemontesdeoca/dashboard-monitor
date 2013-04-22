@@ -227,6 +227,39 @@ class VisualizeHandler(base.BaseHandler):
                     order_by="date"))
             else:
                 # Return 401 Unauthorized
+                logging.error('Unauthorized')
+                self.response.set_status(401)
+                self.response.out.write('Unauthorized')
+        else:
+            # Return 404 Not Found
+            logging.error('Not Found')
+            self.response.set_status(404)
+            self.response.out.write('Not Found')
+
+
+class DashboardHandler(base.BaseHandler):
+    @login_required
+    def get(self, urlsafe_key):
+        user = User.get_by_id(users.get_current_user().user_id())
+
+        try:
+            logging.info('Get page by urlsafe %s' % urlsafe_key)
+
+            key = ndb.Key(urlsafe=urlsafe_key)
+            page = key.get()
+        except:
+            logging.error('Error generating Page object from key.id().')
+            page = None
+
+        if page:
+            if page.user == user.key:
+                template_args = {
+                    'page': page,
+                }
+
+                self.render_template('dashboard.html', **template_args)
+            else:
+                # Return 401 Unauthorized
                 self.response.set_status(401)
                 self.response.out.write('Unauthorized')
         else:
