@@ -42,7 +42,7 @@ class MainPageHandler(base.BaseHandler):
                 # Issue asynchronous fetch operations per page
                 for page in pages:
                     query = Ping.query(Ping.page == page.key)
-                    query = query.order(Ping.date)
+                    query = query.order(-Ping.date)
 
                     # fetch 288 pings representing the last 24 hrs
                     page.pings_future = query.fetch_async(288)
@@ -206,7 +206,7 @@ class VisualizeHandler(base.BaseHandler):
 
                 # Query the data
                 query = Ping.query(Ping.page == page.key)
-                query = query.order(Ping.date)
+                query = query.order(-Ping.date)
 
                 # fetch 288 pings representing the last 24 hrs
                 pings = query.fetch(288)

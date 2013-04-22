@@ -19,3 +19,4 @@ indexes:
   properties:
   - name: page
   - name: date
+    direction: desc
