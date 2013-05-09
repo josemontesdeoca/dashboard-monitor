@@ -3,28 +3,41 @@
 {% block body %}
 
     {% if user %}
-        <div>
-            <p>
-                <a href="/new-page">Agregar nueva pagina</a>
-            </p>
-            <h2>Paginas Web monitoreadas</h2>
-            
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Tiempo de respuesta (24hr avg)</th>
-                    <th>Ultima actualizacion (UTC)</th>
-                </tr>
-                {% for page in pages %}
-                    <tr>
-                        <td><a href="page/{{ page.key.urlsafe() }}">{{ page.name }}</a></td>
-                        <td>{{ page.avg_resp_time }} ms</td>
-                        <td>{{ page.last_ping.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+        <div class="container-fluid">
+            <div class="row-fluid">
 
+                <div class="span2">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Explora</li>
+                            <li><a href="/new-page"><i class="icon-pencil"></i> Nueva pagina</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="span10">
+                    <div class="page-header">
+                        <h2>Paginas Web monitoreadas</h2>
+                    </div>
+                    
+                    <table class="table">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tiempo de respuesta (24hr avg)</th>
+                            <th>Ultima actualizacion (UTC)</th>
+                        </tr>
+                        {% for page in pages %}
+                            <tr>
+                                <td><a href="page/{{ page.key.urlsafe() }}">{{ page.name }}</a></td>
+                                <td>{{ page.avg_resp_time }} ms</td>
+                                <td>{{ page.last_ping.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
+        <div class="clearfix"></div>
     {% endif %}
 
 {% endblock %}
