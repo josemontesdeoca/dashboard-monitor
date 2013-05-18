@@ -2,13 +2,29 @@
 
 {% block body %}
 
-<div>
+<div class="page-header">
     <h2>Configurar pagina a monitorear</h2>
-    <form action="/new-page" method="POST">
-        Nombre <input type="text" name="name"><br>
-        URL <input type="text" name="url" value="http://www.example.com"><br>
-        <input type="submit" value="Registrar Pagina Web">
-    </form>
 </div>
+
+
+<form action="/new-page" method="POST" class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="name">Nombre</label>
+    <div class="controls">
+      <input type="text" name="name" id="name" placeholder="Nombre" required>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="url">URL</label>
+    <div class="controls">
+      <input type="url" name="url" id="url" placeholder="http://www.example.com" required>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <input type="submit" class="btn" value="Registrar Pagina Web">
+    </div>
+  </div>
+</form>
 
 {% endblock %}
