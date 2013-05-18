@@ -43,7 +43,27 @@
             </header>
 
             <section class="app">
-                {% block body %}{% endblock %}
+                {% if user %}
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+
+                            <div class="span2">
+                                <div class="well sidebar-nav">
+                                    <ul class="nav nav-list">
+                                        <li class="nav-header">Explora</li>
+                                        <li><a href="/new-page"><i class="icon-pencil"></i> Nueva pagina</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="span10">
+                                {% block body %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                {% endif %}
+
                 <div id="push"></div>
             </section> <!-- /container -->
         </div>
@@ -59,7 +79,7 @@
                 </div>
             </footer>
         {% endblock %}
-        
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     </body>
