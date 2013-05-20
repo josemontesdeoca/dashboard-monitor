@@ -1,39 +1,25 @@
 {% extends "base.html" %}
 
-{% block head %}
+{% block javascript %}
     <!--Load the AJAX API-->
     <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 
-    <script type="text/javascript">
-
-        // Load the Visualization API and the ready-made Google table visualization.
-        google.load("visualization", "1", {packages: ["corechart"]});
-
-        // Set a callback to run when the API is loaded.
-        google.setOnLoadCallback(drawVisualization);
-
-        // Send the query to the datasource
-        function drawVisualization() {
-
-            var query = new google.visualization.Query("http://dashboard-monitor.appspot.com/monitor.json?page={{ page.key.urlsafe() }}");
-            query.send(handleJsonResponse);
-        }
-
-        function handleJsonResponse(response) {
-            var data = response.getDataTable();
-            var chart = new google.visualization.AreaChart(document.getElementById("monitor_viz"));
-            chart.draw(data, {width: 800, height: 300});
-        }
-    </script>
+    <script src="/static/js/dashboard-gviz.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block body %}
 
-<div>
-    <h1>{{ page.name }} - Dashboard</h1>
-    <p><strong>URL</strong> {{ page.url }}</p>
-    <p><strong>Ultima actualizacion</strong> {{ page.last_ping }}</p>
-    <div id="monitor_viz"></div>
+<div class="page-header">
+    <h2>{{ page.name }}</h2>
 </div>
+
+<dl class="dl-horizontal">
+    <dt>URL</dt>
+    <dd>{{ page.url }}</dd>
+    <dt>Ultima actualizacion</dt>
+    <dd>{{ page.last_ping }}</dd>
+</dl>
+
+<div id="gchart_daily_latency"></div>
 
 {% endblock %}
