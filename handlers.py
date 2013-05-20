@@ -237,6 +237,64 @@ class VisualizeHandler(base.BaseHandler):
             self.response.out.write('Not Found')
 
 
+class DailyLatencyVizHandler(base.BaseHandler):
+    """Handler to generate a DataTable for visualization."""
+
+    @login_required
+    def get(self, urlsafe_key):
+        user = User.get_by_id(users.get_current_user().user_id())
+
+        try:
+            logging.info('Get page by urlsafe %s' % urlsafe_key)
+
+            key = ndb.Key(urlsafe=urlsafe_key)
+            page = key.get()
+        except:
+            logging.error('Error generating Page object from key.id().')
+            page = None
+
+        if page:
+            if page.user == user.key:
+                description = {
+                    'date': ('datetime', 'Fecha'),
+                    'resp_time': ('number', 'Tiempo de respuesta'),
+                }
+
+                data = []
+
+                # Query the data
+                query = Ping.query(Ping.page == page.key)
+                query = query.order(-Ping.date)
+
+                # fetch 288 pings representing the last 24 hrs
+                pings = query.fetch(288)
+
+                for ping in pings:
+                    entry = {
+                        'date': ping.date,
+                        'resp_time': ping.resp_time,
+                    }
+                    data.append(entry)
+
+                data_table = gviz_api.DataTable(description)
+                data_table.LoadData(data)
+
+                self.response.headers['Content-Type'] = 'text/plain'
+                self.response.out.write(data_table.ToJSonResponse(
+                    columns_order=('date', 'resp_time'),
+                    order_by="date"))
+            else:
+                # Return 401 Unauthorized
+                logging.error('Unauthorized')
+                self.response.set_status(401)
+                self.response.out.write('Unauthorized')
+        else:
+            # Return 404 Not Found
+            logging.error('Not Found')
+            self.response.set_status(404)
+            self.response.out.write('Not Found')
+
+
 class DashboardHandler(base.BaseHandler):
     @login_required
     def get(self, urlsafe_key):

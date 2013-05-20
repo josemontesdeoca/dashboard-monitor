@@ -19,5 +19,6 @@ application = webapp2.WSGIApplication([
     ('/cron/monitor', handlers.MonitorHandler),
     ('/task/ping', handlers.PingHandler),
     ('/monitor.json', handlers.VisualizeHandler),
+    ('/viz/v1/dailyLatency/page/(\w+)', handlers.DailyLatencyVizHandler),
     ('/page/(\w+)', handlers.DashboardHandler),
 ], debug=DEBUG)

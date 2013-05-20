@@ -32,5 +32,8 @@ handlers:
   script: main.application
   login: admin
 
+- url: /viz/v1/.*
+  script: main.application
+
 - url: /.*
   script: main.application
