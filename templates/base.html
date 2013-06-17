@@ -44,10 +44,9 @@
             </header>
 
             <section class="app">
-                {% if user %}
-                    <div class="container-fluid">
+                <div class="container-fluid">
+                    {% if user %}
                         <div class="row-fluid">
-
                             <div class="span2">
                                 <div class="well sidebar-nav">
                                     <ul class="nav nav-list">
@@ -62,10 +61,15 @@
                                 {% block body %}{% endblock %}
                             </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                {% endif %}
-
+                    {% else %}
+                        <div class="hero-unit">
+                            <h2>Monitorea el rendimiento de tu Aplicación Web</h2>
+                            <p>WebMon es una aplicación web para monitorear el rendimiento de sitios. La aplicación está pensada como un ejemplo que cubre la funcionalidad básica de Google App Engine.</p>
+                            <p><a href="https://github.com/josemontesdeoca/web-monitor">Descarga el código fuente</a> en <a href="https://github.com/">GitHub</a>.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="clearfix"></div>
                 <div id="push"></div>
             </section> <!-- /container -->
         </div>
