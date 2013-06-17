@@ -4,11 +4,11 @@
  * @author jfmontesdeoca11@gmail.com (Jose Montes de Oca)
  */
 
-/** global namespace for Dashboard Monitor project. */
-var dashboardmonitor = dashboardmonitor || {};
+/** global namespace for Web Monitor project. */
+var webmonitor = webmonitor || {};
 
 /** GViz object for visualization methods. */
-dashboardmonitor.GViz = dashboardmonitor.GViz || {};
+webmonitor.GViz = webmonitor.GViz || {};
 
 /** Load the Visualization API and the core chart package. */
 google.load('visualization', '1.0', {'packages':['corechart']});
@@ -17,7 +17,7 @@ google.load('visualization', '1.0', {'packages':['corechart']});
  * Callback method that creates and populates a DataTable, instantiates the
  * charts and renders them.
  */
-dashboardmonitor.GViz.drawVisualizations = function() {
+webmonitor.GViz.drawVisualizations = function() {
 
     var loc = window.location;
 
@@ -30,7 +30,7 @@ dashboardmonitor.GViz.drawVisualizations = function() {
     var dashboardQuery = new google.visualization.Query(resource, opts);
 
     // Send query request
-    dashboardQuery.send(dashboardmonitor.GViz.handleDashboardQueryResponse);
+    dashboardQuery.send(webmonitor.GViz.handleDashboardQueryResponse);
 };
 
 /**
@@ -38,7 +38,7 @@ dashboardmonitor.GViz.drawVisualizations = function() {
  * page.
  * @param {object} response object containing the dataTable.
  */
-dashboardmonitor.GViz.handleDashboardQueryResponse = function(response) {
+webmonitor.GViz.handleDashboardQueryResponse = function(response) {
     console.log('Entering handleDashboardQueryResponse Function.');
     var data = response.getDataTable();
     var chart = new google.visualization.AreaChart(
@@ -47,4 +47,4 @@ dashboardmonitor.GViz.handleDashboardQueryResponse = function(response) {
 };
 
 /** Set a callback to run when the Google Visualization API is loaded. */
-google.setOnLoadCallback(dashboardmonitor.GViz.drawVisualizations);
+google.setOnLoadCallback(webmonitor.GViz.drawVisualizations);

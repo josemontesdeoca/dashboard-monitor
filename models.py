@@ -1,6 +1,6 @@
 # Copyright 2013 Jose Montes de Oca. All Rights Reserved.
 
-"""Dashboard Monitor DB model classes."""
+"""Web Monitor DB model classes."""
 
 __author__ = 'Jose Montes de Oca <jfmontesdeoca11@gmail.com>'
 

@@ -1,6 +1,6 @@
 # Copyright 2013 Jose Montes de Oca. All Rights Reserved.
 
-"""Dashboard Monitor handlers."""
+"""Web Monitor handlers."""
 
 __author__ = 'Jose Montes de Oca <jfmontesdeoca11@gmail.com>'
 

@@ -1,6 +1,6 @@
-# Dashboard monitor
+# Web Monitor
 
-Dashboard Monitor is a web application for monitoring website performance and
+Web Monitor is a web application for monitoring website performance and
 uptime. The application is meant as an example that cover basic functionality 
 of Google App Engine.
 
