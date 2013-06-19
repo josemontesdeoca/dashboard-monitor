@@ -14,10 +14,11 @@ DEBUG = os.getenv('SERVER_SOFTWARE', '').startswith('Dev')
 
 application = webapp2.WSGIApplication([
     ('/', handlers.MainPageHandler),
+    ('/dashboard', handlers.DashboardHandler),
     ('/register', handlers.RegisterHandler),
     ('/new-page', handlers.NewPageHandler),
     ('/cron/monitor', handlers.MonitorHandler),
     ('/task/ping', handlers.PingHandler),
-    ('/viz/v1/dailyLatency/page/(\w+)', handlers.DailyLatencyVizHandler),
+    ('/viz/v1/dailyLatency', handlers.DailyLatencyVizHandler),
     ('/page/(\w+)', handlers.DashboardHandler),
 ], debug=DEBUG)

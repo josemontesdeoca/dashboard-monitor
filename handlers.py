@@ -184,9 +184,9 @@ class DailyLatencyVizHandler(base.BaseHandler):
     """Handler to generate a DataTable for visualization."""
 
     @login_required
-    def get(self, urlsafe_key):
+    def get(self):
         user = User.get_by_id(users.get_current_user().user_id())
-
+        urlsafe_key = self.request.get('page')
         tqx = self.request.get('tqx')
 
         try:
@@ -243,8 +243,9 @@ class DailyLatencyVizHandler(base.BaseHandler):
 
 class DashboardHandler(base.BaseHandler):
     @login_required
-    def get(self, urlsafe_key):
+    def get(self):
         user = User.get_by_id(users.get_current_user().user_id())
+        urlsafe_key = self.request.get('page')
 
         try:
             logging.info('Get page by urlsafe %s' % urlsafe_key)

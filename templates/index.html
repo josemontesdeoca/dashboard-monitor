@@ -16,7 +16,7 @@
     <tbody>
         {% for page in pages %}
             <tr>
-                <td><a href="page/{{ page.key.urlsafe() }}">{{ page.name }}</a></td>
+                <td><a href="dashboard?page={{ page.key.urlsafe() }}">{{ page.name }}</a></td>
                 {% if page.avg_resp_time %}
                     <td>{{ page.avg_resp_time }} ms</td>
                 {% else%}

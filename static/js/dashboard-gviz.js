@@ -25,7 +25,7 @@ webmonitor.GViz.drawVisualizations = function() {
 
     // Initialize query variable
     var resource = 'http://' + loc.hostname + '/viz/v1/dailyLatency' +
-                    loc.pathname;
+                    loc.search;
     console.log('Query resource at '+resource);
     var dashboardQuery = new google.visualization.Query(resource, opts);
 
