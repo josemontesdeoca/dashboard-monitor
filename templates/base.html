@@ -33,7 +33,7 @@
                                     {% else %}
                                         <li><p class="navbar-text">{{ user.email() }}</p></li>
                                         <li class="divider-vertical"></li>
-                                        <a class="btn btn-danger" href="{{ logout_url }}">Cerrar sesion</a>
+                                        <a class="btn btn-danger" href="{{ logout_url }}">Cerrar sesión</a>
                                     {% endif %}
                                 </ul>
                             </div><!--/.nav-collapse -->
@@ -50,8 +50,8 @@
                                 <div class="well sidebar-nav">
                                     <ul class="nav nav-list">
                                         <li class="nav-header">Explora</li>
-                                        <li{% if active_page == 'index' %} class="active"{% endif %}><a href="/"><i class="icon-home"></i> Inicio</a></li>
-                                        <li{% if active_page == 'new_page' %} class="active"{% endif %}><a href="/new-page"><i class="icon-pencil"></i> Nueva pagina</a></li>
+                                        <li{% if active_page == 'index' %} class="active"{% endif %}><a href="/"><i class="icon-home"></i> Página principal</a></li>
+                                        <li{% if active_page == 'new_page' %} class="active"{% endif %}><a href="/new-page"><i class="icon-pencil"></i> Añadir un sitio</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -62,8 +62,8 @@
                         </div>
                     {% else %}
                         <div class="hero-unit">
-                            <h2>Monitorea el rendimiento de tu Aplicación Web</h2>
-                            <p>WebMon es una aplicación web para monitorear el rendimiento de sitios. La aplicación está pensada como un ejemplo que cubre la funcionalidad básica de Google App Engine.</p>
+                            <h2>Monitorea el rendimiento de tu página Web</h2>
+                            <p>WebMon es una aplicación web para monitorear el rendimiento de tu página web. La aplicación está pensada como un ejemplo que cubre la funcionalidad básica de <a href="http://developers.google.com/appengine">Google App Engine</a>.</p>
                             <p><a href="https://github.com/josemontesdeoca/web-monitor">Descarga el código fuente</a> en <a href="https://github.com/">GitHub</a>.</p>
                         </div>
                     {% endif %}
