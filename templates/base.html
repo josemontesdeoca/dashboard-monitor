@@ -29,12 +29,11 @@
                             <div class="nav-collapse collapse">
                                 <ul class="nav pull-right">
                                     {% if not user %}
-                                        <li><a href="{{ login_url }}">Ingresa</a></li>
+                                        <a class="btn btn-success" href="{{ login_url }}">Ingresa</a>
                                     {% else %}
-                                        <ul class="nav pull-right">
-                                            <li><p class="navbar-text">{{ user.email() }}</p></li>
-                                            <li class="divider-vertical"></li>
-                                            <li><a href="{{ logout_url }}">Cerrar sesion</a></li>
+                                        <li><p class="navbar-text">{{ user.email() }}</p></li>
+                                        <li class="divider-vertical"></li>
+                                        <a class="btn btn-danger" href="{{ logout_url }}">Cerrar sesion</a>
                                     {% endif %}
                                 </ul>
                             </div><!--/.nav-collapse -->
